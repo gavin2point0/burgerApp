@@ -1,14 +1,20 @@
 var orm = require('../config/orm.js');
 
 var ormCalls = {
-    select: function() {
-        orm.selectAll();
+    select: function(cb) {
+        orm.selectAll(function(res) {
+            cb(res)
+        });
     },
     insert: function(burgerInput) {
         orm.insertOne(burgerInput);
     },
-    update: function(devour, burgerStatus, burgerId) {
-        orm.updateOne(devour, burgerStatus, burgerId);
+    update: function(burgerId, cb) {
+        orm.updateOne(burgerId, function(res) {
+            cb(res)
+        }) 
+            
+       
     }
 }
 
